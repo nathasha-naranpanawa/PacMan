@@ -10,8 +10,7 @@
  */
 public class Player {
     
-    private String playerId,name;
-    int positionX, positionY;
+    public String playerId,name;
     Direction previousDirection;
     
     public enum Direction{
@@ -22,12 +21,14 @@ public class Player {
         STAY;    
     }
     
+    public Player(){}
+    
     public Player(String id){
         this.playerId = id;
     }
     
     //set the direction the player moved according to the keys pressed
-    public Direction setDirection(String input){
+    public void setDirection(String input){
         
         Direction direction;
         
@@ -53,18 +54,22 @@ public class Player {
                 break;
         }
         
-        return direction;
-    
+        if (direction != previousDirection){
+            previousDirection = direction;
+        }
     }  
+   
+    public Direction getDirection(){
+        return this.previousDirection;
+    }
     
-    //update current position
-    public void setPosition(){}
-    
-    public void getPosition(){}
-    
-    public void getDirection(){}
-    
+    public void setPlayerId(String id){
+        playerId = id;    
+    }
     //get unique player id
-    public void getId(){}
+    public String getId(String playerId){
+        if (this.playerId.equals(playerId)){return this.playerId;}
+        return null;
+    }
     
 }

@@ -6,13 +6,13 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Login page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <form method="post" action="wait.html">
-            User: <input type="text" name="user" /><br/>
+            Username: <input type="text" name="user" /><br/>
             <input type="submit" value="submit" onsubmit="createPlayer(this.value)">
          </form>
         
@@ -20,12 +20,11 @@ and open the template in the editor.
 
         function createPlayer(input)	
         {    
-                if(input.length != 0) 	//if the input field is not empty
-                {
-                    var xmlhttprequest = new XMLHttpRequest();        
-                    xmlhttprequest.open("POST","UpdateGame?user=" + input,true);
-                    xmlhttprequest.send();
-                }              
+            if(input.length != 0){
+                var xmlhttprequest = new XMLHttpRequest();        
+                xmlhttprequest.open("POST","UpdateGame?user=" + input,true);
+                xmlhttprequest.send();
+            }              
         }
 
         </script>

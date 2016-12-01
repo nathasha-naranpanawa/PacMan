@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,11 +18,20 @@ import javax.servlet.http.HttpServletResponse;
  * @author nathasha
  */
 public class UpdatePlayer extends HttpServlet{
+    
+    Player player;
             
     protected void processRequest(HttpServletRequest request, 
             HttpServletResponse response) throws IOException{
 
-    String key = request.getParameter("key");
+        
+        String key = request.getParameter("key");
+        HttpSession session=request.getSession(true);  
+                
+        player = new Player(session.getId());
+
+        //update player direction
+        player.setDirection(key);
         
     }
     
@@ -46,9 +56,12 @@ public class UpdatePlayer extends HttpServlet{
         
         processRequest(request,response);
         response.setContentType("text/html;charset=UTF-8");
+        
+        
         try (PrintWriter out = response.getWriter()) {
-            out.println(request.getParameter("key"));
+            out.println(player.previousDirection);
         }   
+        
     }
     
 }

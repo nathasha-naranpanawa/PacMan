@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
  */
 public class UpdateGame extends HttpServlet{
     
-    
-    
+    Game game = new Game();
+    int playerCount =0;
     
     @Override
     protected void doPost(HttpServletRequest request,
@@ -29,9 +29,10 @@ public class UpdateGame extends HttpServlet{
       throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
         
-        
-        
-        Game game = new Game();
+        while(playerCount<=2){
+            game.setUpPlayer(request,response);
+            
+        }
         //create individual player objects
         //send player all positions of all players
     }

@@ -32,29 +32,29 @@ and open the template in the editor.
 
         function showSuggestion(input)	
         {    
-                if(input.length != 0) 	//if the input field is not empty
-                {
-                    var xmlhttprequest = new XMLHttpRequest();        
-                    xmlhttprequest.onreadystatechange = getServerResponse;
-                    xmlhttprequest.open("POST","UpdatePlayer?key=" + input,true);
-                    xmlhttprequest.send();
-                }
-                else 
-                { 
-                    document.getElementById("demo").innerHTML = "";	
-                    return;
-                } 
+            if(input.length != 0)
+            {
+                var xmlhttprequest = new XMLHttpRequest();        
+                xmlhttprequest.onreadystatechange = getServerResponse;
+                xmlhttprequest.open("POST","UpdatePlayer?key=" + input,true);
+                xmlhttprequest.send();
+            }
+            else 
+            { 
+                document.getElementById("demo").innerHTML = "";	
+                return;
+            } 
 
-                function getServerResponse() 
+            function getServerResponse() 
+            {
+                xmlhttprequest.onreadystatechange=function()
                 {
-                        xmlhttprequest.onreadystatechange=function()
-                          {
-                          if (xmlhttprequest.readyState==4 && xmlhttprequest.status==200)
-                                {
-                                        document.getElementById("demo").innerHTML=xmlhttprequest.responseText;
-                                }
-                          } 
-                }
+                    if (xmlhttprequest.readyState==4 && xmlhttprequest.status==200)
+                    {
+                        document.getElementById("demo").innerHTML=xmlhttprequest.responseText;
+                    }
+                } 
+            }
         }
 
         </script>

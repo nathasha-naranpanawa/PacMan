@@ -18,30 +18,31 @@ public class Game {
     
     public Game(){}
     
-    HashMap<Integer,String> players = new HashMap<Integer,String>(); //table
-    int playerCount =0;
-    
+    HashMap<String,String> players = new HashMap<String,String>(); //table
+        
     public void setUpPlayer(HttpServletRequest request,
                      HttpServletResponse response){
+        
         String playername = request.getParameter("user");
         
+        Player player;
+        HttpSession session=request.getSession(false);  
         
-        HttpSession session = request.getSession();
-        if (session == null){
-            session = request.getSession(true);
-            Player player = new Player(session.getId());
-            //add player to table
-        }        
-    }
-    
-    public void waitForPlayers(HttpServletRequest request,
-                     HttpServletResponse response){
-        while(playerCount<5){
-            setUpPlayer(request,response);
-            playerCount++;
+        if(session!=null){  
+            //if player already exists
+        }  
+        else{
+            session=request.getSession(true);
+            player = new Player(session.getId());
+            session.setAttribute("name",playername) ;
+            session.setAttribute("id",session.getId());
             
-        }
-    
+            //add player to table
+            players.put(player.playerId,"UP");
+            
+            //add player's position and current direction to the table
+        }  
+       
     }
     
     //return all player positions' coordinates to UpdateGame servlet
@@ -49,7 +50,7 @@ public class Game {
     
     //update players' current direction
     public void updateDirection(){
-        //for each player, request direction and update
+        //for each player, request direction and update from Player properties
     }
     
     //update table with current position every 100ms
