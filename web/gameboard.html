@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form  id="submitform">
+        <p>Press a key on the keyboard in the input field to get the Unicode character code of the pressed key.</p>
+        
+        <p id="demo"></p>
+        
+        Key: <input type="text" size="40" autofocus="autofocus" onkeyup="myFunction(event)" name="key" id="key" >
+        </form>
+        
+        <script language="JavaScript">
+            document.getElementById('submitform').key.focus();
+        
+            function myFunction(event) {
+                var x = event.which || event.keyCode;            
+                showSuggestion(x);
+            }
+        </script>
+        
+        <script>
+
+        function showSuggestion(input)	
+        {    
+                if(input.length != 0) 	//if the input field is not empty
+                {
+                    var xmlhttprequest = new XMLHttpRequest();        
+                    xmlhttprequest.onreadystatechange = getServerResponse;
+                    xmlhttprequest.open("POST","UpdatePlayer?key=" + input,true);
+                    xmlhttprequest.send();
+                }
+                else 
+                { 
+                    document.getElementById("demo").innerHTML = "";	
+                    return;
+                } 
+
+                function getServerResponse() 
+                {
+                        xmlhttprequest.onreadystatechange=function()
+                          {
+                          if (xmlhttprequest.readyState==4 && xmlhttprequest.status==200)
+                                {
+                                        document.getElementById("demo").innerHTML=xmlhttprequest.responseText;
+                                }
+                          } 
+                }
+        }
+
+        </script>
+    </body>
+</html>
